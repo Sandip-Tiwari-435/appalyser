@@ -1,13 +1,25 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-import pandas as pd
+import pandas as pdimport json
+import json
 
-credentials_file = 'job-scraper-421705-008ea9b7609a.json'
+my_dict={}
+my_dict['type']=st.secrets['google_keys']['type']
+my_dict['project_id']=st.secrets['google_keys']['project_id']
+my_dict['private_key_id']=st.secrets['google_keys']['private_key_id']
+my_dict['private_key']=st.secrets['google_keys']['private_key']
+my_dict['client_email']=st.secrets['google_keys']['client_email']
+my_dict['auth_uri']=st.secrets['google_keys']['auth_uri']
+my_dict['client_id']=st.secrets['google_keys']['client_id']
+my_dict['token_uri']=st.secrets['google_keys']['token_uri']
+my_dict['auth_provider_x509_cert_url']=st.secrets['google_keys']['auth_provider_x509_cert_url']
+my_dict['client_x509_cert_url']=st.secrets['google_keys']['client_x509_cert_url']
+my_dict['universe_domain']=st.secrets['google_keys']['universe_domain']
 
 scopes = ['https://www.googleapis.com/auth/spreadsheets']
 scopeCreate = ['https://www.googleapis.com/auth/spreadsheets','https://www.googleapis.com/auth/drive']
-credentials = service_account.Credentials.from_service_account_file(credentials_file, scopes=scopes)
-credentialCreate = service_account.Credentials.from_service_account_file(credentials_file, scopes=scopeCreate)
+credentials = service_account.Credentials.from_service_account_info(my_dict, scopes=scopes)
+credentialCreate = service_account.Credentials.from_service_account_info(my_dict, scopes=scopeCreate)
 service = build('sheets', 'v4', credentials=credentials)
 
 def sheetWriter(spreadsheet_id,sheet_name,myDict):
