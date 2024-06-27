@@ -13,6 +13,7 @@ charset-normalizer
 click
 cryptography
 gitdb
+GitPython
 google-ai-generativelanguage
 google-api-core
 google-api-python-client
@@ -43,6 +44,7 @@ pycparser
 pydantic
 pydantic_core
 pydeck
+Pygments
 pyparsing
 python-dateutil
 pytz
@@ -61,6 +63,7 @@ toml
 toolz
 tornado
 tqdm
+typing_extensions
 tzdata
 uritemplate
 urllib3
