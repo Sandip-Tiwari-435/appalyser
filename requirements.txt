@@ -1,6 +1,7 @@
 altair
 annotated-types
 attrs
+app_store_scraper
 beautifulsoup4
 blinker
 bs4
