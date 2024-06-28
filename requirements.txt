@@ -49,7 +49,7 @@ pyparsing
 python-dateutil
 pytz
 referencing
-requests
+requests>=2.23.0
 rich
 rpds-py
 rsa
