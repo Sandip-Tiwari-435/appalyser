@@ -1,6 +1,3 @@
-altair
-annotated-types
-app-store-scraper
 attrs
 beautifulsoup4
 blinker
