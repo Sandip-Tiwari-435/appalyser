@@ -56,7 +56,7 @@ rsa
 six
 smmap
 soupsieve
-streamlit==1.36.0
+streamlit==1.34.0
 streamlit-cookies-manager
 tenacity
 toml
