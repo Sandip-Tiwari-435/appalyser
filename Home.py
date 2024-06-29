@@ -51,4 +51,4 @@ if __name__ == '__main__':
         session_states.main()
         homer()
     except Exception as e:
-        st.error(e)
+        st.error("Something went wrong. Please report this problem in the comments section")
