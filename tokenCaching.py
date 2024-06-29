@@ -34,6 +34,7 @@ def get_new_token(CLIENT_ID,CLIENT_SECRET):
         "grant_type": "client_credentials"
     }
     response = requests.post(url, headers=headers, data=data)
+    print(response.json())
     save_token(response.json())
     return response.json()['access_token']
 
