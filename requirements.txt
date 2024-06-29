@@ -1,7 +1,6 @@
 altair
 annotated-types
 attrs
-app-store-scraper
 beautifulsoup4
 blinker
 bs4
@@ -49,7 +48,7 @@ pyparsing
 python-dateutil
 pytz
 referencing
-requests>=2.23.0
+requests
 rich
 rpds-py
 rsa
