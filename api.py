@@ -45,7 +45,7 @@ def mainApi(new_username,new_password,new_email):
         'Authorization': f'Bearer {token}',
     }
 
-    data = '{ "intent": "CAPTURE", "purchase_units": [ { "reference_id": "09f80740-38f0-11e8-b467-0ed5f89f718b", "amount": { "currency_code": "USD", "value": "20.00" } } ], "payment_source": { "paypal": { "experience_context": { "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED", "brand_name": "EXAMPLE INC", "locale": "en-US", "landing_page": "LOGIN", "user_action": "PAY_NOW", "return_url": "http://192.168.1.60:8501/Home?username='+new_username+'&password='+new_password+ '&email='+new_email + '", "cancel_url": "http://192.168.1.60:8501/Sign_In" } } } }'
+    data = '{ "intent": "CAPTURE", "purchase_units": [ { "reference_id": "09f80740-38f0-11e8-b467-0ed5f89f718b", "amount": { "currency_code": "USD", "value": "20.00" } } ], "payment_source": { "paypal": { "experience_context": { "payment_method_preference": "IMMEDIATE_PAYMENT_REQUIRED", "brand_name": "EXAMPLE INC", "locale": "en-US", "landing_page": "LOGIN", "user_action": "PAY_NOW", "return_url": "https://appalyser.streamlit.app/Home?username='+new_username+'&password='+new_password+ '&email='+new_email + '", "cancel_url": "https://appalyser.streamlit.app/Sign_In" } } } }'
     
     response = requests.post('https://api-m.paypal.com/v2/checkout/orders', headers=headers, data=data)
     return response.json()['links'][1]['href']
