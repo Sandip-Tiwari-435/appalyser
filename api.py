@@ -2,6 +2,7 @@ import requests
 from tokenCaching import get_access_token
 import uuid
 import streamlit as st
+from urllib.parse import quote
 
 CLIENT_ID_UAT=st.secrets['paypal']['CLIENT_ID_UAT']
 CLIENT_SECRET_UAT=st.secrets['paypal']['CLIENT_SECRET_UAT']
