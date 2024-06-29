@@ -37,9 +37,6 @@ def sign_up_page():
         signin_btn=st.button('Sign In')
         g=False
         if next_btn and new_username and new_password and new_email:
-            new_username=new_username.replace("'",'').replace('"','')
-            new_password=new_password.replace("'",'').replace('"','')
-            new_email=new_email.replace("'",'').replace('"','')
             t=check_duplicate(new_username)
             if not t:
                 url=mainApi(new_username,new_password,new_email)
