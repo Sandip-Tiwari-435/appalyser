@@ -73,8 +73,8 @@ def playground():
     lino=[]
     st.session_state.spreadsheet_id=''
 
-    if not (name and noOfReviews):
-        st.error("Please enter a name to see the results.")
+    if not (name and noOfReviews.isdigit()):
+        st.error("Please enter a name and reviewCount to see the results.")
         return
 
     d=actuate(name,noOfReviews)
