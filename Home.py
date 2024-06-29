@@ -2,12 +2,13 @@ import streamlit as st
 import session_states
 from auth import create_user
 from api import validatePayment
+from urllib.parse import unquote
 
 def homer():
     st.title("📱 Appalyser") 
     if('username' in st.query_params and st.session_state.username!=st.query_params['username']):
         st.success(f"Your payment has been received, {st.query_params['username']}")
-        if validatePayment(st.query_params['token']) and create_user(st.query_params['username'], st.query_params['password'],st.query_params['email'], paid=1):
+        if validatePayment(st.query_params['token']) and create_user(unquote(st.query_params['username']), unquote(st.query_params['password']),unquote(st.query_params['email']), paid=1):
             st.success("User signed up successfully")
             st.switch_page("Home.py")
         else:
