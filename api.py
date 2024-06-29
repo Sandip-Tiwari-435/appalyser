@@ -2,10 +2,10 @@ import requests
 from tokenCaching import get_access_token
 import uuid
 
-CLIENT_ID_UAT = 'AQu1LL-aOtJRNLdz9qbl_RGkH5Ztmss1ny3X2--JvUpGoggcgsJ0U60pIWwIclqDd3xUBlWuiR2Pda3S'
-CLIENT_SECRET_UAT = 'EBaTSLNMgDtp7QvIg6SQdhsEvH9DLqjFVMBu0rt2vLwTpJ5DyFh1uULvvQiar2Rww6o7P53PVVYr1CWo'
-CLIENT_ID='Ac-P7tITyH9b0QAt-9TMpxfquLlf8Xo4b4wqILFCo6h_lizMNs-OTYBQbmcXSq4eYX3p1NXvYiSrMIDx'
-CLIENT_SECRET='EK29Qc9D0vym1e1ZpnVKNcaBiDHV2EMEmZiH6QSxYa17_ghthK-xBuXYD8AH4qF3ADvyzq5AOXb8KAz0'
+CLIENT_ID_UAT=st.secrets['paypal']['CLIENT_ID_UAT']
+CLIENT_SECRET_UAT=st.secrets['paypal']['CLIENT_SECRET_UAT']
+CLIENT_ID=st.secrets['paypal']['CLIENT_ID']
+CLIENT_SECRET=st.secrets['paypal']['CLIENT_SECRET']
 uuuid=uuid.uuid4()
 
 def validatePayment(uid):
