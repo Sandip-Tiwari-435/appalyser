@@ -1,5 +1,4 @@
 from utils import hash_password
-import sqlite3
 import streamlit as st
 import pymongo
 from datetime import datetime
@@ -33,7 +32,6 @@ def create_user(username,password,email,paid=0):
             "summaryRetries":summaryRetries,
             "created_at":datetime.now()
             })
-        print(hash_password(password))
         st.success('User created. Signing in...')
         createSession(username,allowedRetries,summaryRetries)
     except Exception as e:
@@ -45,8 +43,6 @@ def authenticate_user(username,password):
     try:
         coll=client.user_database.users
         result = coll.find_one({'username':username})
-        print(result['password'])
-        print(hash_password(password))
         if len(list(result))!=0 and result['password'] == hash_password(password):
             createSession(username,result['allowedRetries'],result['summaryRetries'])
             return True
