@@ -44,6 +44,7 @@ pydantic
 pydantic_core
 pydeck
 Pygments
+pymongo
 pyparsing
 python-dateutil
 pytz
