@@ -56,5 +56,5 @@ if __name__=="__main__":
         session_states.main()
         main()
     except Exception as e:
-        #st.error("Something went wrong, can you help me get back up?")
-        st.error(e)
+        st.error("Something went wrong, can you help me get back up?")
+        #st.error(e)
