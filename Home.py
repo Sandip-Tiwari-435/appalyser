@@ -38,7 +38,7 @@ def homer():
 
     ### Start Exploring Now!
     Use the sidebar to navigate through different sections. Begin by searching for an app!""",unsafe_allow_html=True)
-    st.video('https://youtu.be/5gN4nMnVdPg',muted=True,autoplay=True,loop=True)
+    st.video('https://youtu.be/5gN4nMnVdPg',muted=True,loop=True)
 
     st.markdown("""
     ### Contact Us:
