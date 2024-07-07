@@ -129,6 +129,7 @@ def playground():
             st.dataframe(dfs["df"])
             lino.append(dfs)
         except Exception as e:
+            print(f"Exception in playground {e}")
             st.error("Something went wrong...")
     if len(lino)!=0 and name and noOfReviews and (name,noOfReviews) not in st.session_state.review:
         st.session_state.searchFree-=1
