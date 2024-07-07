@@ -10,4 +10,5 @@ if __name__=='__main__':
         else:
             sign_up_page()
     except Exception as e:
+        print(f"Exception in sign in: {e}")
         st.error("Something went wrong. Please report this in the comments section")
