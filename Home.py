@@ -37,8 +37,10 @@ def homer():
     - **Store results in sheet:** Store reviews and metadata of the apps in a google sheet
 
     ### Start Exploring Now!
-    Use the sidebar to navigate through different sections. Begin by searching for an app!
+    Use the sidebar to navigate through different sections. Begin by searching for an app!""",unsafe_allow_html=True)
+    st.video('https://youtu.be/5gN4nMnVdPg',muted=True,autoplay=True,loop=True)
 
+    st.markdown("""
     ### Contact Us:
     If you have any questions or feedback, feel free to visit the """+'<a href="/Comments" target="_self">Comment Section</a>'+""" now or reach out to us at [email](mailto:sandipt335@gmail.com).
 
