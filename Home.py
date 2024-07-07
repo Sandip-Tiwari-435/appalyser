@@ -3,11 +3,8 @@ import session_states
 from auth import create_user
 from api import validatePayment
 from urllib.parse import unquote
-from utils import get_ip()
 
 def homer():
-    if 'ip' not in st.session_states:
-        get_ip()
     st.title("📱 Appalyser") 
     if('username' in st.query_params and st.session_state.username!=st.query_params['username']):
         st.success(f"Your payment has been received, {st.query_params['username']}")
