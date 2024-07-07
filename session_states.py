@@ -5,6 +5,7 @@ from genAi import model,consumerContext,developerContext
 from role import Role
 from auth import get_comments
 from streamlit_cookies_manager import EncryptedCookieManager
+import requests
 
 def main():
     st.set_page_config(page_title="Appalyser", page_icon="📱")
@@ -43,6 +44,12 @@ def main():
             st.session_state.searchFree=int(st.session_state.cookies["searchFree"]) if 'searchFree' in st.session_state.cookies else int(config['Playground']['free_search_usage'])
         if 'user_authenticated' not in st.session_state:
             st.session_state['user_authenticated'] = False
+        if 'ip' not in st.session_state:
+            try:
+                st.session_state['ip']=requests.get('https://api64.ipify.org?format=json').json()['ip']
+            except Exception as e:
+                print(f"Error in session states {e}")
+            print(f"The ip of this user: {st.session_state['ip']}")
         if 'username' not in st.session_state:
             st.session_state['username'] = 'Anon'
         if 'new_username' not in st.session_state:
