@@ -163,4 +163,5 @@ if __name__ == "__main__":
         cssDo()
         main()
     except Exception as e:
+        print(f"Exception in comments: {e}")
         st.error("Something went wrong, can you help me get back up?")
