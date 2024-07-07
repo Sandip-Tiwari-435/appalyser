@@ -6,7 +6,7 @@ from role import Role
 from auth import get_comments
 from streamlit_cookies_manager import EncryptedCookieManager
 import requests
-import os
+# import os
 
 def main():
     st.set_page_config(page_title="Appalyser", page_icon="📱")
@@ -45,12 +45,12 @@ def main():
             st.session_state.searchFree=int(st.session_state.cookies["searchFree"]) if 'searchFree' in st.session_state.cookies else int(config['Playground']['free_search_usage'])
         if 'user_authenticated' not in st.session_state:
             st.session_state['user_authenticated'] = False
-        if 'ip' not in st.session_state:
-            try:
-                st.session_state['ip']=requests.get('https://api64.ipify.org?format=json').json()['ip']
-            except Exception as e:
-                os.write(1,f"Error in session states {e}")
-            os.write(1,f"The ip of this user: {st.session_state['ip']}")
+        # if 'ip' not in st.session_state:
+        #     try:
+        #         st.session_state['ip']=requests.get('https://api64.ipify.org?format=json').json()['ip']
+        #     except Exception as e:
+        #         os.write(1,f"Error in session states {e}")
+        #     os.write(1,f"The ip of this user: {st.session_state['ip']}")
         if 'username' not in st.session_state:
             st.session_state['username'] = 'Anon'
         if 'new_username' not in st.session_state:
