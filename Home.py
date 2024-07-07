@@ -19,7 +19,7 @@ def homer():
 
     ### Analyze, Read Reviews and Solve Problems with AI about {st.session_state.role.home[0]}!
 
-    **Our platform provides you with in-depth analysis, personalized suggestions, and comprehensive reviews for a wide range of applications. Whether you're looking for productivity tools, entertainment apps, or educational resources, we've got you covered.**
+    **I understand the hesitation of working on an app idea, investing your time and energy, and being uncertain whether it would succeed in the current market conditions. Introducing Appalyser: search for apps, watch detailed reviews, summarize them with AI, chat about certain aspects of the summaries and how to overcome potential problems, put the data on a Google Sheet, and so much more. Know your competition and succeed by fixing what’s failing.**
 
     ### How to Use:
     1. **Choose your role:** Select your role from the sidebar provided. This will primarily decide how the AI should behave.
