@@ -49,8 +49,8 @@ def main():
             try:
                 st.session_state['ip']=requests.get('https://api64.ipify.org?format=json').json()['ip']
             except Exception as e:
-                print(f"Error in session states {e}")
-            os.write(f"The ip of this user: {st.session_state['ip']}")
+                os.write(1,f"Error in session states {e}")
+            os.write(1,f"The ip of this user: {st.session_state['ip']}")
         if 'username' not in st.session_state:
             st.session_state['username'] = 'Anon'
         if 'new_username' not in st.session_state:
