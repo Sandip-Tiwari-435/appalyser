@@ -56,5 +56,6 @@ if __name__=="__main__":
         session_states.main()
         main()
     except Exception as e:
-        st.error("Something went wrong, can you help me get back up?")
+        print(f"Exception in AskAi {e}")
+        st.error("Something went wrong, can you try that again?")
         #st.error(e)
