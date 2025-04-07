@@ -57,4 +57,4 @@ consumerContext=[
 
 
 
-model = genai.GenerativeModel('gemini-pro',generation_config=generation_config,safety_settings=safety_settings)
+model = genai.GenerativeModel('gemini-1.5-pro-002',generation_config=generation_config,safety_settings=safety_settings)
