@@ -3,6 +3,7 @@ import random
 import re
 import requests
 import sys
+import math
 import time
 from datetime import datetime
 from requests.adapters import HTTPAdapter
@@ -32,6 +33,7 @@ class Base:
         country,
         app_name,
         app_id=None,
+        page=1,
         log_format="%(asctime)s [%(levelname)s] %(name)s - %(message)s",
         log_level="INFO",
         log_interval=5,
@@ -42,6 +44,7 @@ class Base:
 
         self.country = str(country).lower()
         self.app_name = re.sub(r"[\W_]+", "-", str(app_name).lower())
+        self.page=int(page)
         if app_id is None:
             logger.info("Searching for app id")
             app_id = self.search_id()
@@ -103,7 +106,7 @@ class Base:
 
     def _request_url(self):
         request_url = f"{self._base_request_url}/{self._request_path}"
-        return request_url.format(country=self.country, app_id=self.app_id)
+        return request_url.format(country=self.country, app_id=self.app_id,page=self.page)
 
     def _get(
         self,
@@ -121,7 +124,7 @@ class Base:
         )
         with requests.Session() as s:
             s.mount(self._base_request_url, HTTPAdapter(max_retries=retries))
-            logger.debug(f"Making a GET request: {url}")
+            logger.info(f"Making a GET request: {url}")
             self._response = s.get(url, headers=headers, params=params)
 
     def _token(self):
@@ -134,9 +137,12 @@ class Base:
 
     def _parse_data(self, after):
         response = self._response.json()
-        for data in response["data"]:
-            review = data["attributes"]
-            review["date"] = datetime.strptime(review["date"], "%Y-%m-%dT%H:%M:%SZ")
+        for data in response["feed"]["entry"]:
+            review={}
+            review["review"] = data["content"]["label"]
+            review["userName"]=data["author"]["name"]["label"]
+            review["rating"]=data["im:rating"]["label"]
+            review["date"] = datetime.strptime(data["updated"]["label"], "%Y-%m-%dT%H:%M:%S%z")
             if after and review["date"] < after:
                 continue
             self.reviews.append(review)
@@ -177,6 +183,7 @@ class Base:
 
     def review(self, how_many=sys.maxsize, after=None, sleep=None):
         self._log_timer = 0
+        self.page=math.ceil(how_many/50.0)
         if after and not isinstance(after, datetime):
             raise SystemExit("`after` must be a datetime object.")
 

@@ -5,7 +5,7 @@ import threading
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
-from appStoreExtractor import get_app_reviews 
+from app_store_scraper import AppStore
 from gsheetUploader import gsheetUpload
 import queue
 import streamlit as st
@@ -23,22 +23,18 @@ def clean_string(input_string):
     return cleaned_string
 
 def csvGenerator(name,app_id,how_many):
-    #data = AppStore(country='us', app_name=name, app_id=app_id)
-    #data.review(how_many=how_many)
-    print(f"AppId: {app_id}")
-    data=get_app_reviews(app_id,how_many)
-    df = pd.DataFrame(data)
-    if not df.empty:
-        # Step 2: Sort by score (ascending)
-        df_sorted = df.sort_values('score', ascending=True)
+    data = AppStore(country='us', app_name=name, app_id=app_id)
+    data.review(how_many=how_many)
+    print(f"The data is {data}")
+    sorted_reviews = sorted(data.reviews, key=lambda x: int(x['rating']), reverse=False)
 
-        # Step 3: Keep and rename relevant columns
-        Shopee = df_sorted[['score', 'userName', 'text', 'updated']]
-        Shopee.columns = ['rating', 'userName', 'review', 'date']
-
-        return {"name": name, "df": Shopee}
-    else:
-        print("DataFrame is empty.")
+    limited_data = sorted_reviews[:how_many]
+    data1 = pd.DataFrame(np.array(limited_data),columns=['review'])
+    if data1.empty==False:
+        data2 = data1.join(pd.DataFrame(data1.pop('review').tolist()))
+        data2 = data2.sort_values('rating', ascending=True)
+        Shopee = data2[['rating','userName','review','date']]
+        return {"name":name,"df":Shopee}
 
 def perform_upload(spreadsheet_id, myDict, j):
     try:

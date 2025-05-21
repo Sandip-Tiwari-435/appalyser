@@ -6,10 +6,12 @@ logger = logging.getLogger("AppStore")
 
 class AppStore(Base):
     _landing_host = "apps.apple.com"
-    _request_host = "amp-api.apps.apple.com"
+    #_request_host = "amp-api.apps.apple.com"
+    _request_host="itunes.apple.com"
 
     _landing_path = "{country}/app/{app_name}/id{app_id}"
-    _request_path = "v1/catalog/{country}/apps/{app_id}/reviews"
+    #_request_path = "v1/catalog/{country}/apps/{app_id}/reviews"
+    _request_path="{country}/rss/customerreviews/page=1/id={app_id}/RECENT/json"
 
     def __init__(
         self,
