@@ -27,7 +27,6 @@ def csvGenerator(name,app_id,how_many):
     #data.review(how_many=how_many)
     print(f"AppId: {app_id}")
     data=get_app_reviews(app_id,how_many)
-    print(f"Extracted data {data}")
     df = pd.DataFrame(data)
     if not df.empty:
         # Step 2: Sort by score (ascending)
