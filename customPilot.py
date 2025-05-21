@@ -5,7 +5,7 @@ import threading
 import pandas as pd
 import numpy as np
 from bs4 import BeautifulSoup
-from app_store_scraper import AppStore
+from appStoreExtractor import get_app_reviews 
 from gsheetUploader import gsheetUpload
 import queue
 import streamlit as st
@@ -23,14 +23,23 @@ def clean_string(input_string):
     return cleaned_string
 
 def csvGenerator(name,app_id,how_many):
-    data = AppStore(country='us', app_name=name, app_id=app_id)
-    data.review(how_many=how_many)
-    data1 = pd.DataFrame(np.array(data.reviews),columns=['review'])
-    if data1.empty==False:
-        data2 = data1.join(pd.DataFrame(data1.pop('review').tolist()))
-        data2 = data2.sort_values('rating', ascending=True)
-        Shopee = data2[['rating','userName','review','date']]
-        return {"name":name,"df":Shopee}
+    #data = AppStore(country='us', app_name=name, app_id=app_id)
+    #data.review(how_many=how_many)
+    print(f"AppId: {app_id}")
+    data=get_app_reviews(app_id,how_many)
+    print(f"Extracted data {data}")
+    df = pd.DataFrame(data)
+    if not df.empty:
+        # Step 2: Sort by score (ascending)
+        df_sorted = df.sort_values('score', ascending=True)
+
+        # Step 3: Keep and rename relevant columns
+        Shopee = df_sorted[['score', 'userName', 'text', 'updated']]
+        Shopee.columns = ['rating', 'userName', 'review', 'date']
+
+        return {"name": name, "df": Shopee}
+    else:
+        print("DataFrame is empty.")
 
 def perform_upload(spreadsheet_id, myDict, j):
     try:
@@ -82,6 +91,7 @@ def gsheetCacher(countOfReviews,myDict,lino):
 
 def gsheetThreader(countOfReviews,myDict):
     index=0
+    print("in gsheet")
     if len(st.session_state.spreadsheet_id)!=0:
         upload_queue = queue.Queue()
         upload_thread = threading.Thread(target=gsheet_upload_worker, args=(upload_queue,))
@@ -98,6 +108,7 @@ def gsheetThreader(countOfReviews,myDict):
 
 def appStoreScraper(name,countOfReviews):
     st.session_state.usingAppStoreScraper=True
+    print("here in appstore")
     try:
         html_source=requests.get(f"https://www.apple.com/in/search/{name}?src=serp")
     except:

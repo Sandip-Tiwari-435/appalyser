@@ -76,8 +76,9 @@ def playground():
     if not (name and noOfReviews.isdigit()):
         st.error("Please enter a name and reviewCount to see the results.")
         return
-
+    print("we are good")
     d=actuate(name,noOfReviews)
+    print("yes we are")
     if st.session_state.csv:
         if isinstance(d, types.GeneratorType):
             st.session_state.spreadsheet_id=create_google_sheet()
